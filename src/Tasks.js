@@ -1,10 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import uuid from 'uuid/v4'
+
+const TASKS_STORAGE_KEY = 'TASKS_STORAGE_KEY'
+
+const storeTasks = (taskMap) => {
+  localStorage.setItem(
+    TASKS_STORAGE_KEY,
+    JSON.stringify(taskMap)
+  )
+}
+
+const readStoredTasks = () => {
+  const tasksMap = JSON.parse(localStorage.getItem(TASKS_STORAGE_KEY))
+
+  return tasksMap ? tasksMap : {tasks: [], completedTasks: []}
+}
 
 function Tasks() {
   const [taskText, setTaskText] = useState('');
-  const [tasks, setTasks] = useState([]);
-  const [completedTasks, setCompletedTasks] = useState([]);
+  const storedTasks = readStoredTasks();
+  const [tasks, setTasks] = useState(storedTasks.tasks);
+  const [completedTasks, setCompletedTasks] = useState(storedTasks.completedTasks);
+  
+  useEffect( () => {
+    storeTasks({ tasks, completedTasks });
+  })
 
   const updateTaskText = event => {
     setTaskText(event.target.value);
@@ -23,8 +43,6 @@ function Tasks() {
     setCompletedTasks(completedTasks.filter(t => t.id !== task.id))
   }
 
-  console.log('tasks', tasks)
-
   return (
     <div>
       <h3>Tasks</h3>
@@ -37,8 +55,9 @@ function Tasks() {
           tasks.map(task => {
             const { id, taskText } = task;
             return (
-              <div key={id} onClick={completeTask(task)}>
-                {taskText}
+              <div key={id} >
+                {taskText}{' '}
+                <button onClick={completeTask(task)} >Complete</button>
               </div>
             )
         })
