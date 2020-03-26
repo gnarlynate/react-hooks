@@ -14,7 +14,7 @@ function News() {
           return (
             <div key={id}> 
               <a href={url}>{title}</a>
-              <div>{by} - {new Date(time).toLocaleDateString()}</div>
+              <div>{by} - {new Date(time * 1000).toLocaleDateString()}</div>
             </div>
           )
         })
