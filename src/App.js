@@ -31,7 +31,8 @@ function App() {
       <hr />
       <Joke />
       <hr />
-      <Tasks/ >
+      <Tasks />
+      <hr/>
       <News />
     </div>
   );
