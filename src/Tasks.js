@@ -13,10 +13,6 @@ const TYPES = {
 }
 
 const taskReducer = (state, action) => {
-  console.log('hit taskReducer')
-  console.log('state', state)
-  console.log('action', action)
-
   switch(action.type) {
     case TYPES.ADD_TASK:
       return {
@@ -38,11 +34,6 @@ const taskReducer = (state, action) => {
     default:
       return state;
   }
-
-  return {
-    ...state,
-    tasks: [...state.tasks, action.task]
-  }
 }
 
 const TASKS_STORAGE_KEY = 'TASKS_STORAGE_KEY'
@@ -57,7 +48,7 @@ const storeTasks = (taskMap) => {
 const readStoredTasks = () => {
   const tasksMap = JSON.parse(localStorage.getItem(TASKS_STORAGE_KEY))
 
-  return tasksMap ? tasksMap : {tasks: [], completedTasks: []}
+  return tasksMap ? tasksMap : initialTasksState
 }
 
 function Tasks() {
