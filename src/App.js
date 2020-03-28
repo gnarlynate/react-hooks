@@ -8,9 +8,14 @@ import Search from './Search'
 
 function App() {
   const[showGallery, setShowGallery] = useState(true);
+  const [showMatrix, setShowMatrix] = useState(true);
 
   const toggleShowGallery = () => {
     setShowGallery(!showGallery);
+  }
+
+  const toggleShowMatrix = () => {
+    setShowMatrix(!showMatrix);
   }
 
   return (
@@ -31,7 +36,14 @@ function App() {
         </button>
       </div>
       <hr/>
-      <Matrix/>
+      <div>
+        {
+          showMatrix ? <Matrix/> : null
+        }
+        <button onClick={toggleShowMatrix}>
+          {showMatrix ? 'Hide' : 'Show'} Matrix
+        </button>
+      </div>
       <hr/>
       <News />
       
