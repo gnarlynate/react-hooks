@@ -1,23 +1,13 @@
-import React, { useState }from 'react';
+import React from 'react';
 import Gallery from './Gallery'
 import Joke from './Joke'
 import Matrix from './Matrix'
 import News from './News'
 import Tasks from './Tasks'
 import Search from './Search'
+import ToggleButton from './ToggleButton'
 
 function App() {
-  const[showGallery, setShowGallery] = useState(true);
-  const [showMatrix, setShowMatrix] = useState(true);
-
-  const toggleShowGallery = () => {
-    setShowGallery(!showGallery);
-  }
-
-  const toggleShowMatrix = () => {
-    setShowMatrix(!showMatrix);
-  }
-
   return (
     <div className="App">
       <h1>Hello Nathen</h1>
@@ -27,23 +17,13 @@ function App() {
       <hr />
       <Tasks />
       <hr/>
-      <div>
-        {
-          showGallery ? <Gallery /> : null
-        }
-        <button onClick={toggleShowGallery}>
-          {showGallery ? 'Hide' : 'Show'} Gallery
-        </button>
-      </div>
+      <ToggleButton>
+        <Gallery />
+      </ToggleButton>
       <hr/>
-      <div>
-        {
-          showMatrix ? <Matrix/> : null
-        }
-        <button onClick={toggleShowMatrix}>
-          {showMatrix ? 'Hide' : 'Show'} Matrix
-        </button>
-      </div>
+      <ToggleButton>
+        <Matrix />
+      </ToggleButton>
       <hr/>
       <News />
       
